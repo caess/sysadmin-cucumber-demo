@@ -19,4 +19,9 @@ node "tester.example.com" {
     provider => 'gem',
     require => [Package['make'], Package['gcc'],Package['rspec']]
   }
+
+  package { 'net-dns':
+    ensure => installed,
+    provider => 'gem'
+  }
 }
