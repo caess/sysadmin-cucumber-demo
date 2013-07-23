@@ -1,0 +1,1 @@
+This module is used as a separate namespace to keep the resources needed for each node out of node definitions in site.pp.
