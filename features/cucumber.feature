@@ -39,7 +39,8 @@ Feature: Cucumber on the tester VM
       require "net/dns"
 
       When /^I query for the A record for "(.*?)"$/ do |host|
-        @records = Net::DNS::Resolver.start(host, Net::DNS::A)
+        resolver = Net::DNS::Resolver.new(:udp_timeout => 15)
+        @records = resolver.query(host, Net::DNS::A)
       end
 
       Then /I should see that the A record response is "(.*?)"$/ do |ip|
