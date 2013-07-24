@@ -13,4 +13,10 @@ Vagrant.configure("2") do |config|
     tester.vm.hostname = "tester.example.com"
     tester.vm.network :private_network, ip: "172.22.0.200"
   end
+
+  config.vm.define :dns_master do |dns_master|
+    dns_master.vm.box = 'ithiriel-CentOS-6.4-i386-20130714'
+    dns_master.vm.hostname = "dns-master.example.com"
+    dns_master.vm.network :private_network, ip: "172.22.0.23"
+  end
 end

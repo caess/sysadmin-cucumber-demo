@@ -1,0 +1,23 @@
+<%
+require "base64"
+
+now = Time.now.to_i
+now_base64 = Base64.encode64(now.to_s).strip
+%>
+$TTL 300
+example.com.  IN  SOA   ns1.example.com. hostmaster.example.com. (
+                      <%= now %> ; Serial
+                      3h ; Refresh
+                      15 ; Retry
+                      1w ; Expire
+                      300 ; Minimum
+                      )
+              IN  A     192.168.205.199
+              IN  NS    ns1.example.com.
+              IN  NS    ns2.example.com.
+              IN  TXT   "<%= now_base64 %>"
+; Hosts
+www           IN  CNAME example.com.
+foo           IN  A     192.168.205.198
+ns1           IN  A     172.22.0.24
+ns2           IN  A     172.22.0.25
