@@ -40,4 +40,13 @@ class demo::dns_master {
     zonedir => '/var/named/chroot/var/named',
     source => 'puppet:///modules/demo/named.loopback'
   }
+
+  file { '/var/named/chroot/var/named/dynamic':
+    owner  => 'named',
+    group  => 'named',
+    mode   => '0770',
+    ensure => 'directory',
+    require => Package['bind-chroot'],
+    before => Service['named']
+  }
 }
