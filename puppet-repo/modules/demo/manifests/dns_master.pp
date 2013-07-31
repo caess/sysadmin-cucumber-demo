@@ -2,6 +2,7 @@
 #
 #
 class demo::dns_master {
+  # For BIND
   class {'bind': chroot => true}
 
   bind::server::conf { '/etc/named.conf':
@@ -17,6 +18,9 @@ class demo::dns_master {
   }
 
   bind::server::file { 'example.com':
+    owner   => 'vagrant',
+    group   => 'named',
+    mode    => '0640',
     zonedir => '/var/named/chroot/var/named',
     content => template("demo/example.com.erb")
   }
@@ -48,5 +52,24 @@ class demo::dns_master {
     ensure => 'directory',
     require => Package['bind-chroot'],
     before => Service['named']
+  }
+
+  # For tests
+  file { '/home/vagrant/set_txt_record':
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    mode   => '0700',
+    ensure => 'file',
+    source => 'puppet:///modules/demo/set_txt_record'
+  }
+
+  file { '/home/vagrant/named':
+    ensure => 'link',
+    target => '/var/named/chroot/var/named'
+  }
+
+  file { ['/var/named', '/var/named/chroot', '/var/named/chroot/var', '/var/named/chroot/var/named']:
+    mode   => '0755',
+    ensure => 'directory'
   }
 }

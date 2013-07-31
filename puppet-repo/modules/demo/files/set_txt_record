@@ -1,0 +1,23 @@
+#!/bin/env ruby
+
+domain = ARGV[0]
+txt_record = ARGV[1]
+
+zone = File.open("/home/vagrant/named/#{domain}").readlines.to_a
+
+File.open("/home/vagrant/named/#{domain}", "w") do |file|
+  zone.each do |line|
+    if line =~ /^\s+(\d+) ; Serial/
+      serial = $1
+      new_serial = serial.to_i + 1
+
+      line.gsub!(/#{serial}/, new_serial.to_s)
+    elsif line =~ /^\s+IN\s+TXT\s+"(.*?)"/
+      old_txt_record = $1
+
+      line.gsub!(/#{old_txt_record}/, txt_record)
+    end
+
+    file.puts line
+  end
+end

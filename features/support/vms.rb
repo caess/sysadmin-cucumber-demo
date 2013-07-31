@@ -17,5 +17,6 @@ class VagrantVM
 end
 
 $VMS = {
+  'dns_master' => VagrantVM.new('172.22.0.23'),
   'tester' => VagrantVM.new('172.22.0.200')
 }
