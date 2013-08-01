@@ -18,5 +18,7 @@ end
 
 $VMS = {
   'dns_master' => VagrantVM.new('172.22.0.23'),
+  'dns_slave1' => VagrantVM.new('172.22.0.24'),
+  'dns_slave2' => VagrantVM.new('172.22.0.25'),
   'tester' => VagrantVM.new('172.22.0.200')
 }
