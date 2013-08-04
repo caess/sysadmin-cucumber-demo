@@ -13,18 +13,18 @@ class demo::tester {
 
   # Gems
   package { 'rspec':
-    ensure => installed,
+    ensure   => installed,
     provider => 'gem'
   }
 
   package { 'cucumber':
-    ensure => installed,
+    ensure   => installed,
     provider => 'gem',
-    require => [Package['make'], Package['gcc'],Package['rspec']]
+    require  => [Package['make'], Package['gcc'],Package['rspec']]
   }
 
   package { 'net-dns':
-    ensure => installed,
+    ensure   => installed,
     provider => 'gem'
   }
 }

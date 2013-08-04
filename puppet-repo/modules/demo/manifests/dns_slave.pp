@@ -19,30 +19,30 @@ class demo::dns_slave {
 
   bind::server::file { 'named.ca':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.ca'
+    source  => 'puppet:///modules/demo/named.ca'
   }
 
   bind::server::file { 'named.empty':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.empty'
+    source  => 'puppet:///modules/demo/named.empty'
   }
 
   bind::server::file { 'named.localhost':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.localhost'
+    source  => 'puppet:///modules/demo/named.localhost'
   }
 
   bind::server::file { 'named.loopback':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.loopback'
+    source  => 'puppet:///modules/demo/named.loopback'
   }
 
   file { '/var/named/chroot/var/named/dynamic':
-    owner  => 'named',
-    group  => 'named',
-    mode   => '0770',
-    ensure => 'directory',
+    ensure  => 'directory',
+    owner   => 'named',
+    group   => 'named',
+    mode    => '0770',
     require => Package['bind-chroot'],
-    before => Service['named']
+    before  => Service['named']
   }
 }

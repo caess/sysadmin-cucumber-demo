@@ -22,44 +22,44 @@ class demo::dns_master {
     group   => 'named',
     mode    => '0640',
     zonedir => '/var/named/chroot/var/named',
-    content => template("demo/example.com.erb")
+    content => template('demo/example.com.erb')
   }
 
   bind::server::file { 'named.ca':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.ca'
+    source  => 'puppet:///modules/demo/named.ca'
   }
 
   bind::server::file { 'named.empty':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.empty'
+    source  => 'puppet:///modules/demo/named.empty'
   }
 
   bind::server::file { 'named.localhost':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.localhost'
+    source  => 'puppet:///modules/demo/named.localhost'
   }
 
   bind::server::file { 'named.loopback':
     zonedir => '/var/named/chroot/var/named',
-    source => 'puppet:///modules/demo/named.loopback'
+    source  => 'puppet:///modules/demo/named.loopback'
   }
 
   file { '/var/named/chroot/var/named/dynamic':
-    owner  => 'named',
-    group  => 'named',
-    mode   => '0770',
-    ensure => 'directory',
+    ensure  => 'directory',
+    owner   => 'named',
+    group   => 'named',
+    mode    => '0770',
     require => Package['bind-chroot'],
-    before => Service['named']
+    before  => Service['named']
   }
 
   # For tests
   file { '/home/vagrant/set_txt_record':
+    ensure => 'file',
     owner  => 'vagrant',
     group  => 'vagrant',
     mode   => '0700',
-    ensure => 'file',
     source => 'puppet:///modules/demo/set_txt_record'
   }
 
@@ -69,7 +69,7 @@ class demo::dns_master {
   }
 
   file { ['/var/named', '/var/named/chroot', '/var/named/chroot/var', '/var/named/chroot/var/named']:
-    mode   => '0755',
-    ensure => 'directory'
+    ensure => 'directory',
+    mode   => '0755'
   }
 }
