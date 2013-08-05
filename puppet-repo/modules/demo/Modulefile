@@ -1,11 +1,11 @@
-name    'demo-demo'
+name    'demo'
 version '0.1.0'
-source 'UNKNOWN'
-author 'demo'
+source 'https://github.com/caess/sysadmin-cucumber-demo/tree/master/puppet-repo/modules/demo'
+author 'Chris Ess'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'Demo environment module'
+description 'Module for a demo environment for the blog post "An Introduction To Cucumber For System Administrators"'
+project_page 'http://www.ithiriel.com'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'thias/bind', '>= 0.4.0'
