@@ -1,3 +1,5 @@
+require 'pp'
+
 Given(/^the DNS server "(.*?)"$/) do |server|
   @nameserver = server
 end
@@ -21,8 +23,8 @@ When(/^I query my DNS servers for the A record for "(.*?)"$/) do |host|
   @nameservers.each do |server|
     next if @nameservers.first == server
 
-    records[@nameservers.first].answer.map {|r| r.to_s}.sort.should \
-      eq(records[server].answer.map {|r| r.to_s}.sort),
+    records[@nameservers.first].answer.map {|r| r.address}.sort.should \
+      eq(records[server].answer.map {|r| r.address}.sort),
       "DNS responses from #{@nameservers.first} and #{server} don't match!"
   end
 
@@ -66,8 +68,8 @@ Then(/^I should see that DNS change on all DNS servers$/) do
   nameservers.each do |server|
     next if nameservers.first == server
 
-    records[nameservers.first].answer.map {|r| r.to_s}.sort.should \
-      eq(records[server].answer.map {|r| r.to_s}.sort),
+    records[nameservers.first].answer.map {|r| r.txt}.sort.should \
+      eq(records[server].answer.map {|r| r.txt}.sort),
       "DNS responses from #{nameservers.first} and #{server} don't match!"
   end
 
