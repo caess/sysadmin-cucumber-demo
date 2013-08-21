@@ -13,7 +13,8 @@ class demo::dns_master {
       'example.com' => [
         'type master',
         'file "example.com"',
-        'allow-transfer {172.22.0.24; 172.22.0.25;}'
+        'allow-transfer {172.22.0.24; 172.22.0.25;}',
+        'also-notify {172.22.0.24; 172.22.0.25;}'
       ]
     }
   }
