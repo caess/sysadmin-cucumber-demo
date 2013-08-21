@@ -45,4 +45,18 @@ class demo::dns_slave {
     require => Package['bind-chroot'],
     before  => Service['named']
   }
+
+  file { '/var/named/chroot/var/named':
+    ensure  => 'directory',
+    owner   => 'named',
+    group   => 'named',
+    mode    => '0750',
+    require => Package['bind-chroot'],
+    before  => Service['named']
+  }
+
+  selboolean { 'named_write_master_zones':
+    value      => 'on',
+    persistent => true
+  }
 }

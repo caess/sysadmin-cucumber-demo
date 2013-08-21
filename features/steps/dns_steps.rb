@@ -50,6 +50,8 @@ When(/^I make a change to the "(.*?)" zone file on the DNS master$/) do |zone|
     output = ssh.exec!("sudo rndc reload")
     output.strip.should eq("server reload successful"), "rndc failed on DNS master."
   end
+
+  sleep 3
 end
 
 Then(/^I should see that DNS change on all DNS servers$/) do

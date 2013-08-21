@@ -12,7 +12,8 @@ class demo::dns_master {
     zones             => {
       'example.com' => [
         'type master',
-        'file "example.com"'
+        'file "example.com"',
+        'allow-transfer {172.22.0.24; 172.22.0.25;}'
       ]
     }
   }
